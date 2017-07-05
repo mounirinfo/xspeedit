@@ -10,12 +10,18 @@ public class CartonFactory implements AbstractCartonFactory{
 
 	@Override
 	public Carton generateCarton() {
-		return new Carton();
+		Carton returnCart = new Carton();
+		returnCart.setUsedSize(0);
+		return returnCart;
 	}
 
 	@Override
 	public void addArticleToCarton(Article pCurrentArticle, Carton pCart) {
 		String ctx = "CartonFactory.addArticleToCarton : ";
+		if(pCurrentArticle == null || pCart == null){
+			//nothing to do
+			return;
+		}
 		if(pCurrentArticle.getSize() + pCart.getUsedSize() <= Carton.MAX_SIZE){
 			List<Article> articles = pCart.getArticlesInCarton();
 			articles.add(pCurrentArticle);
